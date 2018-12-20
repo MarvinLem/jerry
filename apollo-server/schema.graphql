@@ -1,0 +1,101 @@
+# Included scalars
+scalar JSON
+scalar Upload
+
+# Types
+type User {
+  id: ID!
+  name: String!
+  password: String!
+  email: String!
+  jerrys: [Jerry]
+}
+
+type Jerry {
+  id: ID!
+  name: String!
+  date: String!
+  user_id: ID!
+  students: [Student]
+}
+
+type Project {
+  id: ID!
+  name: String!
+  weight: Int!
+}
+
+type Student {
+  id: ID!
+  name: String!
+  email: String!
+  projects: [Project]
+}
+
+type Jurist {
+    id: ID!
+    name: String!
+    email: String!
+}
+
+# Input
+input UserInput {
+  name: String!
+  password: String!
+  email: String!
+}
+
+input JerryInput {
+  name: String!
+  date: String!
+  user_id: ID!
+}
+
+input ProjectInput {
+  name: String!
+  weight: Int!
+}
+
+input StudentInput {
+    name: String!
+}
+
+input JuristInput {
+    name: String!
+    email: String!
+}
+
+# Query
+type Query {
+  user(id: ID!): [User]
+  users: [User]
+  userConnexion(name: String!, password: String!): [User]
+
+  jerryFromUser(user_id: ID!): [Jerry]
+  jerrys: [Jerry]
+
+  projects: [Project]
+  students: [Student]
+  jurists: [Jurist]
+}
+
+
+# Mutation
+
+type Mutation {
+  addUser(input: UserInput!): User!
+  addJerry(input: JerryInput!): Jerry!
+  addProject(input: ProjectInput!): Project!
+  addStudent(input: StudentInput!): Student!
+  addJurist(input: JuristInput!): Jurist!
+}
+
+
+# Subscription
+type Subscription {
+  userAdded: User!
+  jerryAdded: Jerry!
+  projectAdded: Project!
+  studentAdded: Student!
+  juristAdded: Jurist!
+}
